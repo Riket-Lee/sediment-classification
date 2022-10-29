@@ -8,9 +8,10 @@ while mod(window_size, 2) == 0
     end
 end
 
-[filename, filepath] = uigetfile('*.asc', '打开文件');
+[filename, filepath] = uigetfile('*.asc', '打开文件', 'E:/emdgmformat_revg/Data/Shang_data/products');
 absoluteFilePath = strcat(filepath, filename);
 
+% read raw grid data
 fid = fopen(absoluteFilePath);
 lineNum = 1;
 while ~feof(fid)
@@ -38,15 +39,15 @@ end
 depth = enlargeImageBorder(depth, window_size);
 
 % type = input('\n 1.Zero-order to Third-order spetral moment; \n 2.Mean frequency; \n 3.Spetral width; \n 4. Spetral skewness; \n 5.Quality factor; \n 6.Spectral skewness defined for central moments; \n 7.Fractal dimension; \n The selection is: \n');
-type = input('\n 1.Zero-order to Third-order spetral moment; \n 2.Fractal dimension;');
+type = input('\n 1.Zero-order to Third-order spetral moment; \n 2.Fractal dimension; \n');
 
 if type == 1
 % 获取一阶、二阶、三阶、四阶谱矩，根据不同阶数的谱矩来计算其他的参数
     result = spectralMoment(cellsize, nodata_value, depth, window_size);
-    write_grd4(nrows, ncols, xllcorner, yllcorner, cellsize, nodata_value, result);
+    write_grd4(nrows, ncols, xllcorner, yllcorner, cellsize, nodata_value, result, window_size);
 elseif type == 2
     result = Dfft(cellsize, nodata_value, depth, window_size);
-    write_grd(nrows, ncols, xllcorner, yllcorner, cellsize, nodata_value, result);
+    write_grd(nrows, ncols, xllcorner, yllcorner, cellsize, nodata_value, result, "Dfft_21.asc");
 % elseif type == 3
 %     % 读取文件计算
 % elseif type == 4
@@ -54,4 +55,3 @@ elseif type == 2
 % elseif type == 5
 %     %
 end
-

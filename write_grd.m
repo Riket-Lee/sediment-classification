@@ -8,7 +8,7 @@ function [] = write_grd(nrows, ncols, xllcorner, yllcorner, cellsize, nodata_val
     fprintf(fid, '%-13s %.1f\n', 'nodata_value', nodata_value);
     for i = 1:nrows
         for j = 1:ncols
-            if data(i, j) == nodata_value
+            if data(i, j) == nodata_value || isnan(data(i, j)) || isinf(data(i, j))
                 fprintf(fid, '%.1f', nodata_value);
             else
                 fprintf(fid, '%.3f', data(i, j));

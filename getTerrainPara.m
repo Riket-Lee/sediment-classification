@@ -62,4 +62,4 @@ elseif type == 3
     data = GLCM_Statis(depth, nrows, ncols, nodata_value,window_size, para);
 end
 
-write_grd(nrows, ncols, xllcorner, yllcorner, cellsize, nodata_value, data, 'Energy_3x3.asc');
+write_grd(nrows, ncols, xllcorner, yllcorner, cellsize, nodata_value, data, 'Energy.asc');

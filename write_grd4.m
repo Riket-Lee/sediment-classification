@@ -1,6 +1,6 @@
-function [] = write_grd4(nrows, ncols, xllcorner, yllcorner, cellsize, nodata_value, data4)
+function [] = write_grd4(nrows, ncols, xllcorner, yllcorner, cellsize, nodata_value, data4, window_size)
     for n = 1:4
-        fid = fopen(strcat([num2str(n), 'OrderMoment_35.asc']), 'w');
+        fid = fopen(num2str(n - 1) + "OrderMoment_" + num2str(window_size) + ".asc", 'w');
         fprintf(fid, '%-13s %d\n', 'ncols', ncols);
         fprintf(fid, '%-13s %d\n', 'nrows', nrows);
         fprintf(fid, '%-13s %d\n', 'xllcorner', xllcorner);
